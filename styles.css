@@ -788,3 +788,28 @@ p, li { font-size: clamp(1rem, 1.28vw, 1.18rem); line-height: 1.45; }
     object-position: center top;
   }
 }
+
+/* Giro do logo na chamada final */
+.hero-layout--cta .hero-right img {
+  transform-origin: center;
+  animation: ds-logo-roll 24s cubic-bezier(.4, 0, .2, 1) infinite;
+}
+
+.hero-layout--cta .hero-right:hover img {
+  animation-play-state: paused;
+}
+
+@keyframes ds-logo-roll {
+  0% { rotate: 0deg; }
+  25% { rotate: 90deg; }
+  50% { rotate: 180deg; }
+  75% { rotate: 270deg; }
+  100% { rotate: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-layout--cta .hero-right img {
+    animation: none;
+    rotate: none;
+  }
+}
