@@ -241,30 +241,31 @@ p, li { font-size: clamp(1rem, 1.28vw, 1.18rem); line-height: 1.45; }
 
 .strategy-rail {
   background: var(--gold);
-  color: #050505;
-  min-height: 58px;
+  color: #000;
+  min-height: 162px;
+  padding: 38px 0;
   display: flex;
   align-items: center;
 }
 
 .strategy-rail-inner {
-  width: min(490px, calc(100% - 40px));
+  width: min(1468px, calc(100% - 80px));
   margin: 0 auto;
   display: grid;
-  gap: 10px;
+  gap: 30px;
   align-items: center;
 }
 
 .strategy-rail-inner span {
-  height: 1px;
-  background: rgba(0,0,0,.7);
+  height: 2px;
+  background: #000;
 }
 
 .strategy-rail-inner p {
   margin: 0;
   text-align: center;
-  font-size: .48rem;
-  line-height: 1;
+  font-size: clamp(1rem, 1.12vw, 1.25rem);
+  line-height: 1.2;
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -700,12 +701,18 @@ p, li { font-size: clamp(1rem, 1.28vw, 1.18rem); line-height: 1.45; }
   }
 
   .strategy-rail {
-    min-height: 68px;
+    min-height: 140px;
+    padding: 28px 0;
+  }
+
+  .strategy-rail-inner {
+    width: calc(100% - 40px);
+    gap: 22px;
   }
 
   .strategy-rail-inner p {
-    font-size: .56rem;
-    line-height: 1.25;
+    font-size: .875rem;
+    line-height: 1.5;
   }
 
   .fronts-section {
