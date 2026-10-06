@@ -296,7 +296,6 @@ p, li { font-size: clamp(1rem, 1.28vw, 1.18rem); line-height: 1.45; }
   gap: 70px;
   align-items: center;
   padding: 36px 22px;
-  border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
 .front-row--reverse { grid-template-columns: minmax(300px, .85fr) minmax(0, .95fr); }
