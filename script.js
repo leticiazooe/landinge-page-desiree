@@ -99,3 +99,40 @@ contactForm?.addEventListener("submit", (event) => {
 document.querySelectorAll("[data-footer-placeholder]").forEach((link) => {
   link.addEventListener("click", (event) => event.preventDefault());
 });
+
+// O logo acompanha a passagem da chamada final pela tela.
+(() => {
+  const section = document.querySelector(".cta-final-section");
+  const logo = section?.querySelector(".hero-right img");
+  if (!section || !logo) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let pendingFrame = null;
+
+  const updateLogoRotation = () => {
+    pendingFrame = null;
+    if (reducedMotion.matches) {
+      logo.style.removeProperty("--ds-logo-scroll-angle");
+      return;
+    }
+
+    const bounds = section.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    const progress = Math.max(0, Math.min(1,
+      (viewportHeight - bounds.top) / (viewportHeight + bounds.height)
+    ));
+    const angle = (progress - 0.5) * 180;
+    logo.style.setProperty("--ds-logo-scroll-angle", angle.toFixed(2) + "deg");
+  };
+
+  const scheduleLogoRotation = () => {
+    if (pendingFrame !== null) return;
+    pendingFrame = window.requestAnimationFrame(updateLogoRotation);
+  };
+
+  window.addEventListener("scroll", scheduleLogoRotation, { passive: true });
+  window.addEventListener("resize", scheduleLogoRotation);
+  window.addEventListener("load", scheduleLogoRotation);
+  reducedMotion.addEventListener("change", scheduleLogoRotation);
+  updateLogoRotation();
+})();
