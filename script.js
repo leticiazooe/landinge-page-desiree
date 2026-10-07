@@ -115,6 +115,7 @@ contactForm?.addEventListener("submit", (event) => {
     + "?subject=" + encodeURIComponent(emailSubject)
     + "&body=" + encodeURIComponent(body);
   const gmailUrl = "https://mail.google.com/mail/?view=cm&fs=1"
+    + "&authuser=" + encodeURIComponent(readField("email"))
     + "&to=" + encodeURIComponent(recipient)
     + "&su=" + encodeURIComponent(emailSubject)
     + "&body=" + encodeURIComponent(body);
