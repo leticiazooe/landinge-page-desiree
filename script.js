@@ -118,7 +118,7 @@ contactForm?.addEventListener("submit", (event) => {
     + "&to=" + encodeURIComponent(recipient)
     + "&su=" + encodeURIComponent(emailSubject)
     + "&body=" + encodeURIComponent(body);
-  const usesGmail = /@(gmail\.com|googlemail\.com)$/i.test(readField("email"));
+  const usesGmail = /@(gmail[.]com|googlemail[.]com)$/i.test(readField("email"));
 
   if (status) {
     status.textContent = "Revise a mensagem no seu e-mail e clique em Enviar. Se não abrir, escolha: ";
