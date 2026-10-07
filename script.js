@@ -5,8 +5,8 @@ const progress = document.querySelector(".scroll-progress span");
 const revealItems = document.querySelectorAll(".reveal");
 const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const WHATSAPP_NUMBER = "5516999999999"; // TODO: substitua pelo número real
-const WHATSAPP_MESSAGE = "Olá! Vim pelo site da DS Assessoria Estratégica e gostaria de conversar.";
+const WHATSAPP_NUMBER = "5511915776536";
+const WHATSAPP_MESSAGE = "Olá, equipe DS Assessoria! Vim pelo site e gostaria de conhecer melhor os eventos e as oportunidades de conexões e parcerias. Podem me passar mais informações?";
 
 document.querySelectorAll("[data-whatsapp]").forEach((link) => {
   link.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
