@@ -109,11 +109,37 @@ contactForm?.addEventListener("submit", (event) => {
     readField("message")
   ].join("\r\n");
 
-  window.location.href = "mailto:ceodesiree@dsassessoriaestrategica.com.br"
-    + "?subject=" + encodeURIComponent("Contato pelo site — " + subject)
+  const recipient = "ceodesiree@dsassessoriaestrategica.com.br";
+  const emailSubject = "Contato pelo site — " + subject;
+  const mailtoUrl = "mailto:" + recipient
+    + "?subject=" + encodeURIComponent(emailSubject)
     + "&body=" + encodeURIComponent(body);
+  const gmailUrl = "https://mail.google.com/mail/?view=cm&fs=1"
+    + "&to=" + encodeURIComponent(recipient)
+    + "&su=" + encodeURIComponent(emailSubject)
+    + "&body=" + encodeURIComponent(body);
+  const usesGmail = /@(gmail\.com|googlemail\.com)$/i.test(readField("email"));
+
   if (status) {
-    status.textContent = "Abra seu aplicativo de e-mail para revisar e enviar a mensagem. Se ele não abrir, configure um aplicativo de e-mail padrão ou escreva para ceodesiree@dsassessoriaestrategica.com.br. Os dados continuam preenchidos.";
+    status.textContent = "Revise a mensagem no seu e-mail e clique em Enviar. Se não abrir, escolha: ";
+    const addEmailLink = (label, url, newTab) => {
+      const link = document.createElement("a");
+      link.textContent = label;
+      link.href = url;
+      if (newTab) {
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+      }
+      status.appendChild(link);
+      return link;
+    };
+    const gmailLink = addEmailLink("Abrir no Gmail", gmailUrl, true);
+    status.appendChild(document.createTextNode(" ou "));
+    addEmailLink("Abrir no aplicativo de e-mail", mailtoUrl, false);
+    if (usesGmail) gmailLink.click();
+    else window.location.href = mailtoUrl;
+  } else {
+    window.location.href = usesGmail ? gmailUrl : mailtoUrl;
   }
 });
 
