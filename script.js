@@ -89,11 +89,32 @@ document.querySelectorAll("[data-accordion] details").forEach((detail) => {
 const contactForm = document.querySelector("[data-contact-form]");
 contactForm?.addEventListener("submit", (event) => {
   event.preventDefault();
+  if (!contactForm.reportValidity()) return;
+
   const status = contactForm.querySelector(".form-status");
   const data = new FormData(contactForm);
-  const firstName = data.get("firstName");
-  status.textContent = `${firstName ? firstName + ", " : ""}mensagem preparada. Conecte este formulário ao seu e-mail ou CRM para o envio real.`;
-  contactForm.reset();
+  const readField = (name) => String(data.get(name) ?? "").trim();
+  const fullName = [readField("firstName"), readField("lastName")].filter(Boolean).join(" ");
+  const subject = readField("subject") || "Contato pelo site";
+  const body = [
+    "Olá, equipe DS Assessoria!",
+    "",
+    "Vim pelo site e gostaria de entrar em contato.",
+    "",
+    "Nome: " + fullName,
+    "E-mail para retorno: " + readField("email"),
+    "Assunto: " + subject,
+    "",
+    "Mensagem:",
+    readField("message")
+  ].join("\r\n");
+
+  window.location.href = "mailto:ceodesiree@dsassessoriaestrategica.com.br"
+    + "?subject=" + encodeURIComponent("Contato pelo site — " + subject)
+    + "&body=" + encodeURIComponent(body);
+  if (status) {
+    status.textContent = "Abra seu aplicativo de e-mail para revisar e enviar a mensagem. Se ele não abrir, configure um aplicativo de e-mail padrão ou escreva para ceodesiree@dsassessoriaestrategica.com.br. Os dados continuam preenchidos.";
+  }
 });
 
 document.querySelectorAll("[data-footer-placeholder]").forEach((link) => {
